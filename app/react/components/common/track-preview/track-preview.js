@@ -1,7 +1,14 @@
 import React, { Fragment, Component } from 'react';
 import cx from 'classnames';
+import CopyToClipboard from 'react-copy-to-clipboard';
+
 import { formatSongDuration, showBigArtwork } from '../../../utils/track.utils';
 import Link from '../../angular-adapters/link';
+import FavoriteButton from './favorite-button';
+import RepostButton from './repost-button';
+import ExternalLink from './external-link';
+import PlaylistButton from './playlist-button';
+
 
 export class TrackPreview extends Component {
   state = {
@@ -19,21 +26,21 @@ export class TrackPreview extends Component {
   render() {
     const {
       id,
-      artworkUrl:artwork_url = '',
+      artworkUrl: artwork_url = '',
       title,
       user,
       likes_count,
-      favoritingsCount:favoritings_count,
-      commentCount:comment_count,
-      repostsCount:reposts_count,
+      favoritingsCount: favoritings_count,
+      commentCount: comment_count,
+      repostsCount: reposts_count,
       duration,
       type,
       genre,
       license,
-      permalinkUrl:permalink_url
+      permalinkUrl: permalink_url,
+      userFavorite: user_favorite,
+      userReposted:user_reposted
     } = this.props;
-
-    // console.log(this.props);
 
     const songListClass = cx({
       active: this.state.hover,
@@ -43,121 +50,89 @@ export class TrackPreview extends Component {
     return (
       <Fragment>
         <div
-          className={ songListClass } onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-          <span
-            className="songList_item_song_button"
-            id="{{ data.id }}"
-            song
-            data-song-url="{{ data.stream_url }}"
-            data-song-thumbnail="{{ data.artwork_url }}"
-            data-song-title="{{ data.title }}"
-            data-song-user="{{ data.user.username }}"
-            data-song-user-id="{{ data.user.id }}"
-            data-song-id="{{ data.id }}">
-            <i className="fa fa-play" />
-            <i className="fa fa-pause" />
+          className={songListClass}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+          onClick={
+            this.props.isPlaying ? this.props.pauseSong : this.props.playSong
+          }>
+          <span className="songList_item_song_button">
+            {!this.props.isPlaying && <i className="fa fa-play" />}
+            {this.props.isPlaying && <i className="fa fa-pause" />}
           </span>
           <img
-            ng-controller="AppCtrl"
-            src={ showBigArtwork(artwork_url) }
-            alt={ title }
+            src={showBigArtwork(artwork_url)}
             className="songList_item_artwork"
+            alt={title}
           />
           <div className="songList_item_song_social_details">
             <span className="songList_comment_count">
               <i className="fa fa-comments" />
-              {Math.round(comment_count)}
+              {comment_count}
             </span>
             <span className="songList_likes_count">
               <i className="fa fa-heart" />
-              {Math.round(likes_count || favoritings_count)}
+              {likes_count || favoritings_count}
             </span>
-            <span className="songList_reposts_count" ng-if="data.reposts_count">
-              <i className="fa fa-retweet" />
-              {Math.round(reposts_count)}
-            </span>
+            {!reposts_count ? null : (
+              <span className="songList_reposts_count">
+                <i className="fa fa-retweet" />
+                {reposts_count}
+              </span>
+            )}
           </div>
         </div>
 
         <section className="songList_item_inner">
-          <h2
-            className="songList_item_song_tit selectable-text"
-            title={title}>
+          <h2 className="songList_item_song_tit selectable-text">
             <Link to={`track/${id}`}>{title}</Link>
           </h2>
 
           <h3 className="songList_item_song_info clearfix">
             <div className="songList_item_song_user selectable-text">
-              <a className="pointer" ui-sref="profile({id: {{data.user.id}}})">
+              <Link to={`profile/${user.id}`} className="pointer">
                 {user.username}
-              </a>
-              <span
-                className="songList_item_repost"
-                ng-if="type === 'track-repost'">
-                <i className="fa fa-retweet" />
-                <a
-                  className="pointer"
-                  ui-sref="profile({ id: {{ user.id }} })"
-                  title="Reposted by {{ user.username }}">
-                  {user.username}
-                </a>
-              </span>
+              </Link>
+              {type === 'track-repost' && (
+                <span className="songList_item_repost">
+                  <i className="fa fa-retweet" />
+                  <a className="pointer" title={`Reposted by ${user.username}`}>
+                    {user.username}
+                  </a>
+                </span>
+              )}
             </div>
-            <div ng-controller="AppCtrl" className="songList_item_song_length">
+            <div className="songList_item_song_length">
               {formatSongDuration(duration)}
             </div>
           </h3>
 
           <div className="songList_item_song_details">
             <div className="songList_item_actions">
-              <a
-                favorite-song
-                data-song-id="{{ data.id }}"
-                favorite="data.user_favorite"
-                count="data.favoritings_count"
-                ng-class="{liked: user_favorite}"
-                title="{{data.user_favorite ? 'Unlike' : 'Like'}}">
-                <i className="fa fa-heart" />
-              </a>
-              <a
-                reposted-song
-                data-song-id="{{ data.id }}"
-                reposted="data.user_reposted"
-                ng-class="{ reposted: user_reposted }"
-                title="{{data.user_reposted ? 'Unpost' : 'Repost'}}"
-                ng-if="user.id !== $root.userId">
-                <i className="fa fa-retweet" />
-              </a>
-              <a
-                data-song-id="{{ data.id }}"
-                data-song-name="{{ data.title }}"
-                playlist
-                title="Add to playlist">
-                {' '}
-                <i className="fa fa-bookmark" />
-              </a>
-              <a
-                href="{{ data.permalink_url }}"
-                open-external
-                target="_blank"
-                title="Permalink">
-                {' '}
-                <i className="fa fa-external-link" />
-              </a>
-              <a
-                copy-directive
-                data-copy="{{ data.permalink_url }}"
-                title="Copy">
-                {' '}
-                <i className="fa fa-clipboard" />
-              </a>
+              <FavoriteButton id={id} isFavorited={user_favorite} />
+              <RepostButton id={id} isReposted={user_reposted} />
+              <PlaylistButton id={id} name={title} />
+              <ExternalLink href={permalink_url} as="a">
+                <i title="Permalink" className="fa fa-external-link" />
+              </ExternalLink>
+              <CopyToClipboard
+                text={permalink_url}
+                onCopy={() =>
+                  this.props.addNotification({
+                    type: 'success',
+                    title: 'Song url copied to clipboard!'
+                  })
+                }>
+                <a title="Copy" href="">
+                  {' '}
+                  <i className="fa fa-clipboard" />
+                </a>
+              </CopyToClipboard>
             </div>
             <div className="songList_item_additional_details">
-              <span
-                className="songList_item_genre"
-                ui-sref="tag({name: data.genre})">
+              <Link to={`tag/${genre}`} className="songList_item_genre">
                 #{genre}
-              </span>
+              </Link>
               <span className="songList_item_license">{license}</span>
             </div>
           </div>
