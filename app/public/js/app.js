@@ -34,8 +34,7 @@ app.config(function (
     })
     .state('favorites', {
       url: '/favorites',
-      templateUrl: 'views/favorites/favorites.html',
-      controller: 'FavoritesCtrl'
+      template: '<react component="pages/favorites"></react>'
     })
     .state('tracks', {
       url: '/tracks',
@@ -44,8 +43,7 @@ app.config(function (
     })
     .state('track', {
       url: '/track/:id',
-      templateUrl: 'views/track/track.html',
-      controller: 'TrackCtrl'
+      template: '<react component="pages/track"></react>'
     })
     .state('playlists', {
       url: '/playlists',
