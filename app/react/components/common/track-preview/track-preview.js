@@ -37,20 +37,20 @@ export class TrackPreview extends Component {
   render() {
     const {
       id,
-      artworkUrl: artwork_url = '',
+      artwork_url = '',
       title,
       user,
       likes_count,
-      favoritingsCount: favoritings_count,
-      commentCount: comment_count,
-      repostsCount: reposts_count,
+      favoritings_count,
+      comment_count,
+      reposts_count,
       duration,
       type,
       genre,
       license,
-      permalinkUrl: permalink_url,
-      userFavorite: user_favorite,
-      userReposted:user_reposted
+      permalink_url,
+      user_favorite,
+      user_reposted
     } = this.props;
 
     const songListClass = cx({

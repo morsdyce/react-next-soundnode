@@ -30,8 +30,7 @@ app.config(function (
     })
     .state('charts', {
       url: '/charts/:genre',
-      templateUrl: 'views/charts/charts.html',
-      controller: 'ChartsCtrl'
+      template: '<react component="pages/charts"></react>'
     })
     .state('favorites', {
       url: '/favorites',
