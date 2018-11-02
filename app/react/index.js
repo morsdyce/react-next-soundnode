@@ -1,6 +1,6 @@
+import "../public/js/components/main";
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import "../public/js/components/main";
 
 export function bootstrap(domElement, component, props, injector, routeParams) {
   const Component = lazy(() => import(`./${component}`));
