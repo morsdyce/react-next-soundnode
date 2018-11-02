@@ -8,8 +8,19 @@ import FavoriteButton from './favorite-button';
 import RepostButton from './repost-button';
 import ExternalLink from './external-link';
 import PlaylistButton from './playlist-button';
+import { inject, observer } from 'mobx-react';
 
 
+@inject((stores, props) => ({
+  playSong: () => stores.playerStore.play(props.id),
+  pauseSong: () => stores.playerStore.stop(),
+  addNotification: (...args) => stores.notificationsStore.addNotification(...args),
+  isPlaying:
+    stores.playerStore.currentSong &&
+    stores.playerStore.currentSong.id === props.id &&
+    stores.playerStore.isPlaying
+}))
+@observer
 export class TrackPreview extends Component {
   state = {
     hover: false

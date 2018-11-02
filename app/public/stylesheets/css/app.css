@@ -2132,24 +2132,3 @@ input[type="text"].full-width {
   margin-bottom: 10px;
   width: 100%;
 }
-
-
-.songList_item_container_artwork:hover .fa-pause {
-  display: none;
-}
-
-.songPlaying .songList_item_container_artwork:hover .fa-pause {
-  display: block;
-}
-
-.player .player_play-pause .fa-pause {
-  display: none;
-}
-
-.songPlaying .player .player_play-pause .fa-pause {
-  display: block;
-}
-
-.songPlaying .player .player_play-pause .fa-play {
-  display: none;
-}
