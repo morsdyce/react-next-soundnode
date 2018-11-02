@@ -159,3 +159,4 @@ app.run(function (
 });
 
 angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 200);
+app.constant('reactInterface', window.soundNodeReact);

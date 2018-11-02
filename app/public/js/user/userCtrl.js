@@ -5,7 +5,8 @@ app.controller('UserCtrl', function (
   $scope,
   $window,
   $state,
-  SCapiService
+  SCapiService,
+  reactInterface
 ) {
   var endpoint = 'me';
   var params = '';
@@ -16,6 +17,8 @@ app.controller('UserCtrl', function (
     .then(function (data) {
       $rootScope.userId = data.id;
       $scope.data = data;
+
+      reactInterface.stores.authStore.setUser(data);
     }, function () {
       guiConfig.logOut();
     });

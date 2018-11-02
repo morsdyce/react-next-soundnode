@@ -26,3 +26,5 @@ window.settings.updateUserConfig = function () {
         clientId: window.localStorage.scClientId
     }), 'utf-8');
 }
+
+window.soundNodeReact.stores.authStore.setToken(userConfig.accessToken);
