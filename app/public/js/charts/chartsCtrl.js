@@ -151,7 +151,11 @@ app.controller('ChartsCtrl', function (
     $scope.title = 'Top 50 - '+genre.title;
     $scope.data = '';
     $scope.busy = false;
+    $scope.text = 'Hello React Next!';
 
+    $scope.changeText = function() {
+      $scope.text = 'Hello React Next 2018!';
+    };
 
     SC2apiService.getCharts(genre.link)
         .then(filterCollection)

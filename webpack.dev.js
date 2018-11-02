@@ -8,7 +8,7 @@ const publicPath = path.join( __dirname, 'app', 'dist');
 module.exports = {
   target: 'electron-renderer',
   devtool: 'eval',
-  entry: [path.join(__dirname, './app/react/index.js'), path.join(__dirname, "./app/public/js/components/main")],
+  entry: path.join(__dirname, './app/react/index.js'),
   output: {
     path: path.join(__dirname, './app/dist'),
     filename: 'bundle.js',
