@@ -25,8 +25,8 @@ app.config(function (
   $stateProvider
     .state('stream', {
       url: '/',
-      templateUrl: 'views/stream/stream.html',
-      controller: 'StreamCtrl'
+      templateUrl: 'views/charts/charts.html',
+      controller: 'ChartsCtrl'
     })
     .state('charts', {
       url: '/charts/:genre',

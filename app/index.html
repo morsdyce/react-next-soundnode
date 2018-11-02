@@ -41,21 +41,6 @@
           <a href="http://www.soundnodeapp.com" target="_blank" open-external ng-class="{ updateAvailable: updateAvailable }" data-link="true"> update available! </a>
         </li>
       </ul>
-
-      <ul class="topbarSearch">
-        <!-- search -->
-        <div class="search" ng-controller="SearchInputCtrl">
-          <form ng-submit="onSubmit(keyword)" class="search-form">
-            <input type="search" placeholder="Search" id="search" class="search_field" ng-change="typeahead(keyword)" ng-model="keyword"
-              ng-model-options="{debounce: 350}" ng-focus="refocusTypehead(keyword)" ng-blur="blurTypeahead()">
-            <i class="fa fa-search search-icon"></i>
-            <input type="submit" id="submit" value="Submit" class="searchButton" />
-          </form>
-          <div class="dropdown" id="searchDropDown">
-          </div>
-        </div>
-        <!-- search / end -->
-      </ul>
     </header>
     <!-- header / end -->
 
@@ -100,21 +85,9 @@
             </a>
           </li>
           <li class="mainNav_item" ui-sref-active="active">
-            <a class="mainNav_button" ui-sref="stream">
-              <i class="fa fa-cloud"></i>
-              <span class="mainNav_tit">Stream</span>
-            </a>
-          </li>
-          <li class="mainNav_item" ui-sref-active="active">
             <a class="mainNav_button" ui-sref="favorites">
               <i class="fa fa-heart"></i>
               <span class="mainNav_tit">Likes</span>
-            </a>
-          </li>
-          <li class="mainNav_item" ui-sref-active="active">
-            <a class="mainNav_button" ui-sref="tracks">
-              <i class="fa fa-tags"></i>
-              <span class="mainNav_tit">Tracks</span>
             </a>
           </li>
           <li class="mainNav_item" ui-sref-active="active">
@@ -198,6 +171,7 @@
 
   </div>
   <!-- UI App / end -->
+  <script src="dist/bundle.js"></script>
 
   <!-- vendors -->
   <script>
@@ -269,9 +243,6 @@
 <!-- filters / utils -->
 <script src="public/js/common/utilsService.js"></script>
 <script src="public/js/common/roundFilter.js"></script>
-
-<!-- Webpack bundle -->
-<script src="dist/bundle.js"></script>
 
 </body>
 

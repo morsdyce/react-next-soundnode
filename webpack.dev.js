@@ -3,14 +3,18 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const publicPath = path.join( __dirname, 'app', 'dist');
+
 module.exports = {
-  target: 'node',
+  target: 'electron-renderer',
   devtool: 'eval',
-  entry: path.join(__dirname, './app/public/js/components/main.jsx'),
+  entry: [path.join(__dirname, './app/react/index.js'), path.join(__dirname, "./app/public/js/components/main")],
   output: {
     path: path.join(__dirname, './app/dist'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: `file://${publicPath}/`,
+    library: 'soundNodeReact',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
@@ -29,19 +33,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
     }),
-    new webpack.NoEmitOnErrorsPlugin()
-  ],
-  externals: [
-    (function () {
-      const IGNORES = [
-        'electron'
-      ];
-      return function (context, request, callback) {
-        if (IGNORES.indexOf(request) >= 0) {
-          return callback(null, "require('" + request + "')");
-        }
-        return callback();
-      };
-    })()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.ExternalsPlugin('commonjs', [
+      'electron'
+    ])
   ]
 };
