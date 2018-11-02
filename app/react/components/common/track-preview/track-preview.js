@@ -1,31 +1,46 @@
 import React, { Fragment, Component } from 'react';
-import { formatSongDuration } from '../../../utils/track.utils';
+import cx from 'classnames';
+import { formatSongDuration, showBigArtwork } from '../../../utils/track.utils';
 
 export class TrackPreview extends Component {
+  state = {
+    hover: false
+  };
+
+  handleMouseEnter = () => {
+    this.setState({ hover: true });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ hover: false });
+  };
+
   render() {
     const {
       id,
-      artwork_url = '',
+      artworkUrl:artwork_url = '',
       title,
       user,
       likes_count,
-      favoritings_count,
-      comment_count,
-      reposts_count,
+      favoritingsCount:favoritings_count,
+      commentCount:comment_count,
+      repostsCount:reposts_count,
       duration,
       type,
       genre,
       license,
-      permalink_url
+      permalinkUrl:permalink_url
     } = this.props;
+
+    const songListClass = cx({
+      active: this.state.hover,
+      songList_item_container_artwork: true
+    });
 
     return (
       <Fragment>
         <div
-          className="songList_item_container_artwork"
-          ng-class="{ active: hover }"
-          ng-mouseover="hover = true"
-          ng-mouseleave="hover = false">
+          className={ songListClass } onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
           <span
             className="songList_item_song_button"
             id="{{ data.id }}"
@@ -40,10 +55,8 @@ export class TrackPreview extends Component {
             <i className="fa fa-pause" />
           </span>
           <img
-            ng-controller="AppCtrl"
-            ng-src="{{ showBigArtwork (data.artwork_url) }}"
-            onError="if (this.src != 'public/img/logo-short.png') this.src = 'public/img/logo-short.png';"
-            alt="{{ data.title }}"
+            src={ showBigArtwork(artwork_url) }
+            alt={ title }
             className="songList_item_artwork"
           />
           <div className="songList_item_song_social_details">
