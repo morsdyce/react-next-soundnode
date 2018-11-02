@@ -120,8 +120,8 @@ export class TrackPreview extends Component {
 
           <div className="songList_item_song_details">
             <div className="songList_item_actions">
-              <FavoriteButton id={id} isFavorited={user_favorite} />
-              <RepostButton id={id} isReposted={user_reposted} />
+              <FavoriteButton id={id} />
+              <RepostButton id={id} />
               <PlaylistButton id={id} name={title} />
               <ExternalLink href={permalink_url} as="a">
                 <i title="Permalink" className="fa fa-external-link" />

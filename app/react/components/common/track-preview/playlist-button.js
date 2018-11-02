@@ -1,24 +1,21 @@
 import React, { Component } from "react";
-import { withInjector } from "../../angular-adapters/withInjector";
+import { inject, observer } from "mobx-react";
 
+@inject((stores) => ({
+  tracksStore: stores.tracksStore,
+  openModal: (...args) => stores.modalStore.openModal(...args)
+}))
+@observer
 class PlaylistButton extends Component {
-  scope = this.props.$rootScope.$new(true);
-
   handleClick = () => {
-    this.scope.playlistSongId = this.props.id;
-    this.scope.playlistSongName = this.props.name;
-
-    this.props.ngDialog.open({
-      showClose: false,
-      scope: this.scope,
-      controller: "PlaylistDashboardCtrl",
-      template: "views/playlists/playlistDashboard.html"
+    this.props.openModal({
+      type: 'playlist-modal',
+      params: {
+        id: this.props.id,
+        name: this.props.name
+      }
     });
   };
-
-  componentWillUnmount() {
-    this.scope.$destroy();
-  }
 
   render() {
     return (
@@ -30,4 +27,4 @@ class PlaylistButton extends Component {
   }
 }
 
-export default withInjector(["ngDialog", '$rootScope'])(PlaylistButton);
+export default PlaylistButton;

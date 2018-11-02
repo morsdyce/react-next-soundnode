@@ -1,21 +1,30 @@
 import React from "react";
+import { inject, observer } from "mobx-react";
 import cx from "classnames";
-import { withInjector } from '../../angular-adapters/withInjector';
+import { get } from 'lodash/fp';
 
+@inject((stores, props) => ({
+  track: stores.tracksStore.getById(props.id),
+  userId: get('authStore.user.id', stores),
+}))
+@observer
 class RepostButton extends React.Component {
   handleClick = () => {
-    // activate relevant angular service
+    this.props.track.toggleRepost();
   };
 
   render() {
-    const currentUser = this.props.$rootScope.userId;
-    const { userId, user_reposted } = this.props;
+    const { track, userId } = this.props;
+
+    if (!track) {
+      return null;
+    }
 
     const classNames = cx({
-      reposted: user_reposted
+      reposted: track.user_reposted
     });
 
-    if (currentUser === userId) {
+    if (track.user_id === userId) {
       return null;
     }
 
@@ -23,7 +32,7 @@ class RepostButton extends React.Component {
       <a
         className={classNames}
         onClick={this.handleClick}
-        title={user_reposted ? "Unpost" : "Repost"}
+        title={track.user_reposted ? "Unpost" : "Repost"}
       >
         <i className="fa fa-retweet" />
       </a>
@@ -31,4 +40,4 @@ class RepostButton extends React.Component {
   }
 }
 
-export default withInjector(['$rootScope'])(RepostButton);
+export default RepostButton;
