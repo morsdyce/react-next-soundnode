@@ -1,0 +1,88 @@
+.dropdown {
+    position: absolute;
+    top: 46px;
+    z-index: 1000;
+    display: none;
+    min-width: 160px;
+    padding: 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 13px;
+    background-color: #111;
+    border-radius: 0 0 7px 7px;
+    box-shadow: 2px 2px 20px 2px #000000;
+    width: 100%;
+    overflow: hidden;
+}
+
+.artist-container, .tracks-container {
+    margin-bottom: 10px;
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    text-align: left;
+
+    &, & h4 {
+        cursor: pointer;
+    }
+
+    & img {
+        margin-right: 10px;
+        width: 25px;
+        height: 25px;
+    }
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.4);
+
+        & h4 {
+            font-weight: 700;
+            color: #FFF;
+        }
+    }
+}
+
+.dropdown h3, .dropdown h4 {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.dropdown h3 {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 13px;
+    &.dropdown-title {
+        color: $scColor;
+        border-left: 5px solid $scColor;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        will-change: padding-left;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.dropdown h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 3px 0 0 0;
+}
+
+.dropdown h3.show-all {
+    color: $scColor;
+    border-left: 5px solid $scColor;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    will-change: padding-left;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        color: #FFF;
+        cursor: pointer;
+        padding-left: 15px;
+    }
+}

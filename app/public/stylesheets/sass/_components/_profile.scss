@@ -1,0 +1,21 @@
+.profile {
+    overflow: hidden;
+    margin-bottom: 25px;
+    display: flex;
+}
+
+.profile_box {
+    display: inline-block;
+    margin: 0 5px 0 5px;
+    flex: 1 0 300px;
+}
+
+.profile_pic {
+    margin: 0 5px 0 5px;
+    flex: 0 1 300px;
+    min-width: 150px;
+}
+
+.profile_description {
+    font-size: 12px;
+}

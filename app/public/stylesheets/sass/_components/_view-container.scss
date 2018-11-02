@@ -1,0 +1,85 @@
+body {
+  .ngdialog-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    margin-top: -250px;
+    margin-left: -400px;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    font-size: 20px;
+  }
+}
+
+.mainView {
+  // flex: 5 0 0;
+  padding: 10px 20px;
+  margin-left: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+
+  & > div {
+    min-width: 130px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  & > div > h1 {
+    margin: 10px 0 30px;
+    font-weight: 300;
+    font-size: 3em;
+  }
+}
+
+/*
+* Modal UI components for adding song to playlist
+*/
+.mediaBox_wrapper {
+  float: left;
+  margin: 0 5px;
+
+  &, & * {
+    cursor: pointer;
+  }
+
+  &:first-child {
+    margin-left: 0px;
+  }
+}
+
+.mediaBox_item_info {
+  font-size: 12px;
+  display: inline-block;
+  margin: 0 5px 0 0;
+
+    &:last-child {
+      margin-right: 0;
+    }
+}
+
+/*
+* filter tracks component
+*/
+.filterTracks {
+    h4 {
+        font-size: 12px
+    }
+
+    ul {
+        margin-bottom: 30px;
+    }
+
+    li {
+        display: inline;
+        margin: 10px;
+
+        strong {
+            font-size: 11px;
+        }
+    }
+    li:first-child {
+        margin-left: 0;
+    }
+}

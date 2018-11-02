@@ -1,0 +1,41 @@
+<div class="settingsView">
+
+    <h1> {{ ::title }}</h1>
+
+    <!-- Notifications & Switch -->
+    <ul>
+        <li class="full-flex">
+            <div class="settings-container leftSide">
+                <h2>Notifications</h2>
+                <label>Enable/Disable song notifications </label>
+            </div>
+            <div class="settings-switch">
+                <div class="onoffswitch">
+                    <input type="checkbox" class="onoffswitch-checkbox" name="notifications" id="notificationSettings" ng-model="notification" ng-change="notificationSettings()" ng-checked="notification">
+                    <label class="onoffswitch-label" for="notificationSettings"></label>
+                </div>
+            </div>
+        </li>
+        <li class="full-flex flex-column">
+            <div class="settings-secondary-container leftSide">
+                <h2>API Key</h2>
+                <label>Swap out API Key for your own.</label>
+            </div>
+            <div class="settings-secondary-container leftSide">
+                <input type="text" class="full-width" name="client_id" id="client_id" ng-model="client_id" ng-change="scClientId()" ng-value="client_id">
+            </div>
+        </li>
+        <li class="full-flex">
+            <div class="settings-container leftSide">
+                <h2>Clean local storage</h2>
+                <label>Remove last user logged in, last window screen size, notification state.</label>
+            </div>
+            <div class="settings-switch">
+                <div class="onoffswitch">
+                    <button ng-click="cleanStorage()" class="button follow_button">Clean All</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>

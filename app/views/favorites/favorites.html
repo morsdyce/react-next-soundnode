@@ -1,0 +1,24 @@
+<div class="favoritesView">
+    <h1> {{ ::title }}</h1>
+
+    <!-- Song list wrapper -->
+    <div class="favoritesView_inner">
+        <ul class="songList"
+            infinite-scroll='loadMore()'
+            infinite-scroll-distance='0'
+            infinite-scroll-container='".mainView"'
+            infinite-scroll-immediate-check='false' >
+
+            <li class="songList_item" ng-repeat="data in data track by $index"
+                ng-if="data.kind == 'track' && data.streamable">
+
+                <tracks data="data"/>
+
+            </li>
+        </ul>
+    </div>
+    <!-- Song list wrapper / end -->
+
+    <div ng-include="'views/common/loading.html'"></div>
+
+</div>

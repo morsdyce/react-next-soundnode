@@ -1,0 +1,165 @@
+.topFrame {
+  background: $bodyBackground;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  border-top: 2px solid $scColor;
+  border-bottom: 1px solid $separatorDarkColor;
+  box-shadow: 0 0 7px 0px #000;
+  z-index: 100;
+  -webkit-app-region: drag;
+}
+
+.windowAction {
+  overflow: hidden;
+  float: left;
+  margin: 7px 0 0 0;
+  -webkit-app-region: no-drag;
+}
+.windowAction_item {
+  float: left;
+  margin: 13px 5px 0;
+  font-size: 7px;
+  cursor: pointer;
+  border-radius: 15px;
+  padding: 1px 3px;
+  letter-spacing: 0;
+
+
+  &:first-child {
+    margin-left: 10px;
+  }
+
+  &:hover .fa {
+    color: $defaultColor;
+  }
+
+  & .fa {
+    cursor: pointer;
+    color: #222326;
+  }
+}
+
+.macActionButtons {
+  & #closeApp {
+    background: #FF4441;
+  }
+
+  & #minimizeApp {
+    background: #FFBE00;
+  }
+
+  & #expandApp {
+    background: #00D645;
+  }
+
+  & .fa {
+    opacity: 0;
+  }
+
+  &:hover .fa {
+    opacity: 1;
+    color: #222326;
+  }
+}
+
+.windowsActionButtons {
+  float: right;
+  -webkit-app-region: no-drag;
+  margin: 0;
+
+  & li {
+    margin: 0;
+    padding: 7px 14px 7px;
+    border-radius: 0;
+    &:hover {
+      background: #2C2C2C;
+      .fa {
+        color: #FFF;
+      }
+    }
+  }
+
+  & #minimizeApp {
+      padding: 10px 14px 4px;
+  }
+
+  & #closeApp {
+    padding: 6px 20px 8px;
+    background: #390000;
+    &:hover {
+      background: #530000;
+    }
+  }
+
+  & .fa {
+    color: #FFF;
+  }
+}
+
+.navigationButton {
+  font-size: 14px;
+  margin-top: 8px;
+
+  & .fa {
+    color: #464647;
+  }
+
+  &.goBack {
+
+  }
+
+  &.goForward {
+
+  }
+}
+
+.appInfo {
+  float: right;
+  margin: 15px 0 0 0;
+  -webkit-app-region: no-drag;
+}
+.appInfo_item {
+  margin: 0 10px;
+  float: left;
+
+  & a {
+    font-size: 14px;
+    color: $linkColor;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &:last-child a {
+    display: none;
+    color: $scColor;
+    &.updateAvailable {
+      display: block;
+    }
+  }
+}
+
+.topbarSearch {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  max-width: 500px;
+  -webkit-app-region: no-drag;
+}
+
+@media (max-width: 940px) {
+  .topbarSearch {
+    width: 25%;
+  }
+}
+
+@media (min-width: 940px) {
+  .topbarSearch {
+    width: 35%;
+  }
+}

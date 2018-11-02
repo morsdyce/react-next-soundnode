@@ -1,0 +1,34 @@
+.following {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.following_item {
+  display: inline-block;
+  position: relative;
+  margin: 0 5px 60px 5px;
+  width: 210px;
+
+  & .songList_item_song_tit {
+      height: auto;
+  }
+
+  & .songList_item_box:first-child {
+    margin-bottom: 20px;
+  }
+
+  & .songList_item_box:last-child {
+    margin: 10px 0 0 0;
+  }
+
+  & .fa:last-child {
+    display: table-cell;
+  }
+
+  & .songList_item_container_artwork {
+    height: 210px;
+  }
+
+}
