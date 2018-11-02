@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import cx from 'classnames';
 import { formatSongDuration, showBigArtwork } from '../../../utils/track.utils';
+import Link from '../../angular-adapters/link';
 
 export class TrackPreview extends Component {
   state = {
@@ -32,6 +33,8 @@ export class TrackPreview extends Component {
       permalinkUrl:permalink_url
     } = this.props;
 
+    // console.log(this.props);
+
     const songListClass = cx({
       active: this.state.hover,
       songList_item_container_artwork: true
@@ -55,6 +58,7 @@ export class TrackPreview extends Component {
             <i className="fa fa-pause" />
           </span>
           <img
+            ng-controller="AppCtrl"
             src={ showBigArtwork(artwork_url) }
             alt={ title }
             className="songList_item_artwork"
@@ -78,9 +82,8 @@ export class TrackPreview extends Component {
         <section className="songList_item_inner">
           <h2
             className="songList_item_song_tit selectable-text"
-            title="{{ data.title }}"
-            ui-sref="track({id: {{data.id}}})">
-            {title}
+            title={title}>
+            <Link to={`track/${id}`}>{title}</Link>
           </h2>
 
           <h3 className="songList_item_song_info clearfix">
