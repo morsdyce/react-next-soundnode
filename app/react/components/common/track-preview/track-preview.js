@@ -3,7 +3,7 @@ import cx from 'classnames';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { formatSongDuration, showBigArtwork } from '../../../utils/track.utils';
-import Link from '../../angular-adapters/link';
+import {Link} from 'react-router-dom';
 import FavoriteButton from './favorite-button';
 import RepostButton from './repost-button';
 import ExternalLink from './external-link';

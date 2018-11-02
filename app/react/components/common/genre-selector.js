@@ -1,8 +1,8 @@
 import React from 'react';
 import { GENRES } from "../../constants/genres";
-import { withInjector } from '../angular-adapters/withInjector';
+import { withRouter } from 'react-router';
 
-function GenreSelector({ $state })  { return (
+function GenreSelector({ history })  { return (
   <div className="genre-selector">
     <h3 className="title">Charts By Genre</h3>
     <div className="btn-group">
@@ -10,7 +10,7 @@ function GenreSelector({ $state })  { return (
         .map(genre => (
           <button
             key={ genre.link }
-            onClick={() => $state.go("charts", { genre: genre.link }, { reload:true })}
+            onClick={() => history.push(`/charts/${genre.link}`)}
             className="button inline"
           >
             {genre.title}
@@ -21,4 +21,4 @@ function GenreSelector({ $state })  { return (
 );
 }
 
-export default withInjector(['$state'])(GenreSelector);
+export default withRouter(GenreSelector);
